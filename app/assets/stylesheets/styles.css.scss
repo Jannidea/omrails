@@ -20,7 +20,7 @@ body {
 	a {color: $gray;}
 }
 
-/*Required for jQuery Masonry */
+ /*Required for jQuery Masonry */
 
 .box {
 	margin: 5px;
@@ -41,4 +41,7 @@ body {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	border-radius: 5px; 
+}
+
+.description { margin: 10px 0 5px; 
 }
