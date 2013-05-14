@@ -1,11 +1,9 @@
 class PinsController < ApplicationController
- before_filter :authenticate_user!, except: [:index]
- 
-
+  before_filter :authenticate_user!, except: [:index, :show]
   # GET /pins
   # GET /pins.json
   def index
-    @pins = Pin.order("created_at desc")
+    @pins = Pin.order("created_at desc").page(params[:page]).per_page(20)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -47,7 +45,7 @@ class PinsController < ApplicationController
 
     respond_to do |format|
       if @pin.save
-        format.html { redirect_to @pin, notice: 'Pin was successfully created.' }
+        format.html { redirect_to pins_path, notice: 'Pin was successfully created.' }
         format.json { render json: @pin, status: :created, location: @pin }
       else
         format.html { render action: "new" }
@@ -63,7 +61,7 @@ class PinsController < ApplicationController
 
     respond_to do |format|
       if @pin.update_attributes(params[:pin])
-        format.html { redirect_to @pin, notice: 'Pin was successfully updated.' }
+        format.html { redirect_to pins_path, notice: 'Pin was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
